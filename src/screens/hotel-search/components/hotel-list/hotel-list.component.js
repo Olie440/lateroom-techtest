@@ -19,7 +19,15 @@ export function HotelList({ hotels }) {
             <div className="hotel-list">
                 <Loading message="Loading Hotel Data." />
             </div>
-        )
+        );
+    }
+
+    if (hotels.state === 'Error') {
+        return (
+            <div className="hotel-list">
+                <Error message="Error loading Hotel Data, please refresh to try again." />
+            </div>
+        );
     }
 
     if (hotels.state !== 'Success') {

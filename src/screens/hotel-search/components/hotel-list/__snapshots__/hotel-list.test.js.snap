@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HotelList renders nothing when state = "None" 1`] = `""`;
+
+exports[`HotelList renders the error component when state = "Error" 1`] = `
+<div
+  className="hotel-list"
+>
+  <Error
+    message="Error loading Hotel Data, please refresh to try again."
+  />
+</div>
+`;
+
 exports[`HotelList renders the hotels when state = "Success" 1`] = `
 <div
   className="hotel-list"

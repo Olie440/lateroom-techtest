@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Error /> displays the passed in message 1`] = `
+<div
+  className="error"
+>
+  <p
+    className="error__title"
+  >
+    Error
+  </p>
+  <p
+    className="error__body"
+  >
+    testestets
+  </p>
+</div>
+`;
+
+exports[`<Error /> renders correctly 1`] = `
+<div
+  className="error"
+>
+  <p
+    className="error__title"
+  >
+    Error
+  </p>
+  <p
+    className="error__body"
+  />
+</div>
+`;

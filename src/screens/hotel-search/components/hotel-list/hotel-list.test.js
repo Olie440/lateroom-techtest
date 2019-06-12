@@ -27,6 +27,30 @@ describe('HotelList', () => {
         const component = shallow(<HotelList {...props} />);
         expect(component).toMatchSnapshot();
     });
+
+    it('renders the error component when state = "Error"', () => {
+        const props = {
+            hotels: {
+                state: 'Error',
+                data: null
+            }
+        };
+
+        const component = shallow(<HotelList {...props} />);
+        expect(component).toMatchSnapshot();
+    });
+
+    it('renders nothing when state = "None"', () => {
+        const props = {
+            hotels: {
+                state: 'None',
+                data: null
+            }
+        };
+
+        const component = shallow(<HotelList {...props} />);
+        expect(component).toMatchSnapshot();
+    });
 })
 
 describe('mapStateToProps', () => {
