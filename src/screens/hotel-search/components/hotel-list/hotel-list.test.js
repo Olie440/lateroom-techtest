@@ -40,8 +40,9 @@ describe('HotelList', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('renders nothing when state = "None"', () => {
+    it('renders nothing and calls the loadHotels action when state = "None"', () => {
         const props = {
+            loadHotels: jest.fn(),
             hotels: {
                 state: 'None',
                 data: null
@@ -49,7 +50,9 @@ describe('HotelList', () => {
         };
 
         const component = shallow(<HotelList {...props} />);
+
         expect(component).toMatchSnapshot();
+        expect(props.loadHotels).toHaveBeenCalled();
     });
 })
 

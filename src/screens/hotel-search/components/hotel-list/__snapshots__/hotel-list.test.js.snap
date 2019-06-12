@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HotelList renders nothing when state = "None" 1`] = `""`;
+exports[`HotelList renders nothing and calls the loadHotels action when state = "None" 1`] = `""`;
 
 exports[`HotelList renders the error component when state = "Error" 1`] = `
 <div
