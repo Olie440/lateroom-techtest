@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import logo from '../../assets/images/logo.svg';
 import './hotel-search.css';
 
-function App() {
+export function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -23,4 +24,8 @@ function App() {
   );
 }
 
-export default App;
+export function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(App);
