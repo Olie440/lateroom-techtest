@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Loading from '../../../../components/loading/loading.component';
 
 // Ideally we would have an id for each hotel we could use as the key
 export function HotelRow({ name, starRating, facilities }, index) {
@@ -13,6 +14,14 @@ export function HotelRow({ name, starRating, facilities }, index) {
 }
 
 export function HotelList({ hotels }) {
+    if (hotels.state === 'Loading') {
+        return (
+            <div className="hotel-list">
+                <Loading message="Loading Hotel Data." />
+            </div>
+        )
+    }
+
     if (hotels.state !== 'Success') {
         return null;
     }

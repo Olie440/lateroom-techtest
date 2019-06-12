@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading /> displays the passed in message 1`] = `
+<div
+  className="loading"
+>
+  <p
+    className="loading__title"
+  >
+    Loading
+  </p>
+  <p
+    className="loading__body"
+  >
+    testestets
+  </p>
+</div>
+`;
+
+exports[`<Loading /> renders correctly 1`] = `
+<div
+  className="loading"
+>
+  <p
+    className="loading__title"
+  >
+    Loading
+  </p>
+  <p
+    className="loading__body"
+  />
+</div>
+`;

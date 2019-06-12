@@ -59,3 +59,13 @@ exports[`HotelList renders the hotels when state = "Success" 1`] = `
   </div>
 </div>
 `;
+
+exports[`HotelList renders the loading component when state = "Loading" 1`] = `
+<div
+  className="hotel-list"
+>
+  <Loading
+    message="Loading Hotel Data."
+  />
+</div>
+`;
