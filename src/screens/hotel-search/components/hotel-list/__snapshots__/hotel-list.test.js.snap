@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HotelList renders the hotels when state = "Success" 1`] = `
+<div
+  className="hotel-list"
+>
+  <div
+    className="hotel-list__row"
+    key="0"
+  >
+    <p
+      className="hotel-list__title"
+    >
+      hotelone
+    </p>
+    <p>
+      Rating: 
+      5
+    </p>
+    <p>
+      Facilities: 
+      car park, pool
+    </p>
+  </div>
+  <div
+    className="hotel-list__row"
+    key="1"
+  >
+    <p
+      className="hotel-list__title"
+    >
+      hoteltwo
+    </p>
+    <p>
+      Rating: 
+      3
+    </p>
+    <p>
+      Facilities: 
+      car park, gym
+    </p>
+  </div>
+  <div
+    className="hotel-list__row"
+    key="2"
+  >
+    <p
+      className="hotel-list__title"
+    >
+      hotelthree
+    </p>
+    <p>
+      Rating: 
+      3
+    </p>
+    <p>
+      Facilities: 
+    </p>
+  </div>
+</div>
+`;
