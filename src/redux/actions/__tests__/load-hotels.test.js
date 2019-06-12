@@ -43,7 +43,7 @@ describe('loadHotels Action', () => {
         await loadHotels()(mockDispatch);
         expect(mockDispatch).toHaveBeenCalledWith({
             type: DATA_RECEIVED,
-            data: expectedData
+            payload: expectedData
         });
     });
 });

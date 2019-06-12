@@ -11,7 +11,7 @@ export default function loadHotels() {
             .then((data) => {
                 dispatch({
                     type: DATA_RECEIVED,
-                    data
+                    payload: data
                 });
             })
             .catch(() => {
