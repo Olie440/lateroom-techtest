@@ -1,14 +1,17 @@
 import express from 'express';
+import cors from 'cors';
 import { green, blue, yellow, bold } from 'chalk';
 import MockHotels from '../__mocks__/mock-hotels';
 
 const app = express();
 const mockHotels = MockHotels();
 
+app.use(cors());
+
 app.get('/hotels', (req, res) => {
     console.log(
         blue(`GET: ${bold(req.ip)} ->`),
-        yellow(bold('/games/[id]'))
+        yellow(bold('/hotels'))
     );
 
     res.type('application/json');

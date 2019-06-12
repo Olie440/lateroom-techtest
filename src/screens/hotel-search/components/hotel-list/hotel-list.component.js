@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Loading from '../../../../components/loading/loading.component';
+import Error from '../../../../components/error/error.component';
+import loadHotels from '../../../../redux/actions/load-hotels';
 
 // Ideally we would have an id for each hotel we could use as the key
 export function HotelRow({ name, starRating, facilities }, index) {
@@ -13,7 +15,7 @@ export function HotelRow({ name, starRating, facilities }, index) {
     );
 }
 
-export function HotelList({ hotels }) {
+export function HotelList({ hotels, loadHotels }) {
     if (hotels.state === 'Loading') {
         return (
             <div className="hotel-list">
@@ -30,7 +32,8 @@ export function HotelList({ hotels }) {
         );
     }
 
-    if (hotels.state !== 'Success') {
+    if (hotels.state === 'None') {
+        loadHotels();
         return null;
     }
 
@@ -47,4 +50,8 @@ export function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(HotelList);
+const actions = {
+    loadHotels
+}
+
+export default connect(mapStateToProps, actions)(HotelList);
