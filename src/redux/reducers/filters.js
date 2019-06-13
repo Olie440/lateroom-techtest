@@ -6,7 +6,7 @@ const defaultState = {
     availableFilters: []
 }
 
-export default function (state, { type, payload }) {
+export default function (state = defaultState, { type, payload } = {}) {
     switch (type) {
         case ADD_FILTER:
             return addFilter(state, payload);

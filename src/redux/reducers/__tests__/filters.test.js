@@ -108,4 +108,13 @@ describe('Filter Reducer', () => {
             appliedFilters: []
         });
     });
+
+    it('returns the default state when nothing is passed into it', () => {
+        const result = reducer();
+
+        expect(result).toEqual({
+            availableFilters: [],
+            appliedFilters: []
+        });
+    });
 });

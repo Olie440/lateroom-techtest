@@ -4,6 +4,7 @@ exports[`renders without crashing 1`] = `
 <div
   className="App"
 >
+  <Connect(HotelFilter) />
   <Connect(HotelList) />
 </div>
 `;
