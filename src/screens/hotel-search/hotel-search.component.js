@@ -1,20 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './hotel-search.css';
 import HotelList from './components/hotel-list/hotel-list.component';
 import HotelFilter from './components/hotel-filter/hotel-filter.component';
 
-export function App() {
+export default function HotelSearchScreen() {
   return (
-    <div className="App">
+    <div className="hotel-search-screen">
       <HotelFilter />
       <HotelList />
     </div>
   );
 }
-
-export function mapStateToProps(state) {
-  return state;
-}
-
-export default connect(mapStateToProps)(App);

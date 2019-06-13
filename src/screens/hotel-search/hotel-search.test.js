@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App } from './hotel-search.component';
+import HotelSearchScreen from './hotel-search.component';
 
-it('renders without crashing', () => {
-  const component = shallow(<App />);
+it('renders correctly', () => {
+  const component = shallow(<HotelSearchScreen />);
   expect(component).toMatchSnapshot();
 });

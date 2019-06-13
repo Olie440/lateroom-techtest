@@ -26,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "mock-server": "babel-node mock-server/index.js",
-    "eject": "react-scripts eject"
+    "coverage": "npm test -- --coverage --watchAll=false && open ./coverage/lcov-report/index.html"
   },
   "eslintConfig": {
     "extends": "react-app"

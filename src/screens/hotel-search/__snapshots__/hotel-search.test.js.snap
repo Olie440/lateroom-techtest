@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders without crashing 1`] = `
+exports[`renders correctly 1`] = `
 <div
-  className="App"
+  className="hotel-search-screen"
 >
   <Connect(HotelFilter) />
   <Connect(HotelList) />
