@@ -1,15 +1,10 @@
 import { ADD_FILTER, REMOVE_FILTER } from '../consts';
 
-export function addFilter(filter) {
-    return {
-        type: ADD_FILTER,
-        payload: filter
-    };
-}
+export function toggleFilter(filter, applied) {
+    const action = applied ? ADD_FILTER : REMOVE_FILTER;
 
-export function removeFilter(filter) {
     return {
-        type: REMOVE_FILTER,
+        type: action,
         payload: filter
     };
 }
