@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Loading from '../../../../components/loading/loading.component';
 import Error from '../../../../components/error/error.component';
 import loadHotels from '../../../../redux/actions/load-hotels';
+import { intersection } from 'lodash';
 
 // Ideally we would have an id for each hotel we could use as the key
 export function HotelRow({ name, starRating, facilities }, index) {
@@ -15,7 +16,7 @@ export function HotelRow({ name, starRating, facilities }, index) {
     );
 }
 
-export function HotelList({ hotels, loadHotels }) {
+export function HotelList({ hotels, loadHotels, appliedFilters }) {
     if (hotels.state === 'Loading') {
         return (
             <div className="hotel-list">
@@ -37,16 +38,29 @@ export function HotelList({ hotels, loadHotels }) {
         return null;
     }
 
+    if (appliedFilters.length === 0) {
+        return (
+            <div className="hotel-list">
+                {hotels.data.map(HotelRow)}
+            </div>
+        );
+    }
+
     return (
         <div className="hotel-list">
-            { hotels.data.map(HotelRow) }
+            {
+                hotels.data
+                    .filter(x => intersection(x.facilities, appliedFilters).length)
+                    .map(HotelRow)
+            }
         </div>
     );
 }
 
 export function mapStateToProps(state) {
     return {
-        hotels: state.hotels
+        hotels: state.hotels,
+        appliedFilters: state.filters.appliedFilters
     }
 }
 

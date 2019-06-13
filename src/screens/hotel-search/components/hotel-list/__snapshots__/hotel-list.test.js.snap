@@ -12,7 +12,17 @@ exports[`HotelList renders the error component when state = "Error" 1`] = `
 </div>
 `;
 
-exports[`HotelList renders the hotels when state = "Success" 1`] = `
+exports[`HotelList renders the loading component when state = "Loading" 1`] = `
+<div
+  className="hotel-list"
+>
+  <Loading
+    message="Loading Hotel Data."
+  />
+</div>
+`;
+
+exports[`HotelList when state = "Success" renders all hotels when appliedFilters is empty 1`] = `
 <div
   className="hotel-list"
 >
@@ -72,12 +82,45 @@ exports[`HotelList renders the hotels when state = "Success" 1`] = `
 </div>
 `;
 
-exports[`HotelList renders the loading component when state = "Loading" 1`] = `
+exports[`HotelList when state = "Success" renders filtered hotels when appliedFilters is not empty 1`] = `
 <div
   className="hotel-list"
 >
-  <Loading
-    message="Loading Hotel Data."
-  />
+  <div
+    className="hotel-list__row"
+    key="0"
+  >
+    <p
+      className="hotel-list__title"
+    >
+      hotelone
+    </p>
+    <p>
+      Rating: 
+      5
+    </p>
+    <p>
+      Facilities: 
+      car park, pool
+    </p>
+  </div>
+  <div
+    className="hotel-list__row"
+    key="1"
+  >
+    <p
+      className="hotel-list__title"
+    >
+      hoteltwo
+    </p>
+    <p>
+      Rating: 
+      3
+    </p>
+    <p>
+      Facilities: 
+      car park, gym
+    </p>
+  </div>
 </div>
 `;
