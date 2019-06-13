@@ -4,6 +4,12 @@ The aim of this tech test is to take a json response and create a filterable lis
 # Projects / Progress
 You can find a list of completed issues under the project tab, This is where I plan what I am going to do before I start coding.
 
+# Running the Project
+- run `npm install`
+- run `npm start`
+- run `npm run mock-server` in a second terminal
+- navigate to `http://localhost:3000`
+
 ## Available Scripts
 
 In the project directory, you can run:
