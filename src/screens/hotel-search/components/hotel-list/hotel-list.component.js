@@ -3,15 +3,23 @@ import { connect } from 'react-redux';
 import Loading from '../../../../components/loading/loading.component';
 import Error from '../../../../components/error/error.component';
 import loadHotels from '../../../../redux/actions/load-hotels';
-import { intersection } from 'lodash';
+import { intersection, capitalize } from 'lodash';
+
+import './hotel-list.css';
 
 // Ideally we would have an id for each hotel we could use as the key
 export function HotelRow({ name, starRating, facilities }, index) {
     return (
         <div className="hotel-list__row" key={index}>
-            <p className="hotel-list__title">{name}</p>
-            <p>Rating: {starRating}</p>
-            <p>Facilities: {facilities.join(', ')}</p>
+            <p className="hotel-list__title">{capitalize(name)}</p>
+            <p className="hotel-list__sub">
+                <strong>Rating: </strong>
+                {starRating}/5
+            </p>
+            <p className="hotel-list__sub">
+                <strong>Facilities: </strong>
+                {facilities.map(x => capitalize(x)).join(', ')}
+            </p>
         </div>
     );
 }

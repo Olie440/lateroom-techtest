@@ -1,0 +1,22 @@
+.hotel-filter {
+    position: relative;
+    text-align: right;
+}
+
+.hotel-filter__menu {
+    position: absolute;
+    right: 0;
+    text-align: left;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+.hotel-filter__menu-item {
+    height: 1.5rem;
+}
+
+.hotel-filter__menu-item input {
+    vertical-align: sub;
+    margin-right: 0.25em;
+}

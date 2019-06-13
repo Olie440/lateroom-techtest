@@ -14,9 +14,12 @@ app.get('/hotels', (req, res) => {
         yellow(bold('/hotels'))
     );
 
-    res.type('application/json');
-    res.send(JSON.stringify(mockHotels));
-    res.end();
+    // I want to show off the loading screen
+    setTimeout(() => {
+        res.type('application/json');
+        res.send(JSON.stringify(mockHotels));
+        res.end();
+    }, 1000);
 });
 
 app.listen('4000');

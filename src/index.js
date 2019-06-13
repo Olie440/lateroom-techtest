@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './global.css';
 import HotelSearchScreen from './screens/hotel-search/hotel-search.component';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
+import './assets/css/reset.css';
+import './assets/css/global.css';
 
 const ComponentTree = (
     <Provider store={store}>

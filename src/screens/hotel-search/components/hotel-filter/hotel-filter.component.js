@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { toggleFilter } from '../../../../redux/actions/filter-hotels';
 
+import './hotel-filter.css';
+
 export class HotelFilter extends Component {
     state = {
         open: false
