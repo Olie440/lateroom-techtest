@@ -4,7 +4,15 @@ exports[`renders correctly 1`] = `
 <div
   className="hotel-search-screen"
 >
-  <Connect(HotelFilter) />
-  <Connect(HotelList) />
+  <div
+    className="hotel-search-screen__container"
+  >
+    <div
+      className="hotel-search-screen__header"
+    >
+      <Connect(HotelFilter) />
+    </div>
+    <Connect(HotelList) />
+  </div>
 </div>
 `;

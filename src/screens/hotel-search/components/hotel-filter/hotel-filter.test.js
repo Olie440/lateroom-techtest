@@ -64,6 +64,14 @@ describe('HotelFilter', () => {
         });
     });
 
+    it('disables the button when availableFilters.length = 0', () => {
+        component.setProps({
+            availableFilters: []
+        });
+
+        expect(component).toMatchSnapshot();
+    });
+
     describe('mapStateToProps', () => {
         it('destructures the filters key', () => {
             const result = mapStateToProps({

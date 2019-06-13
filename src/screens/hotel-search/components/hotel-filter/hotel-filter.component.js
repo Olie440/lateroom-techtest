@@ -12,9 +12,11 @@ export class HotelFilter extends Component {
     }
 
     render() {
+        const buttonDisabled = this.props.availableFilters.length === 0;
+
         return (
             <div className="hotel-filter">
-                <button className="hotel-filter__button" onClick={this.toggleOpen}>
+                <button className="hotel-filter__button" onClick={this.toggleOpen} disabled={buttonDisabled}>
                     <FontAwesomeIcon icon={faFilter} />
                 </button>
                 { this.state.open && this.renderMenu() }

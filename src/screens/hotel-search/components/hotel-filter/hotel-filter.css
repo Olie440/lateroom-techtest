@@ -3,6 +3,11 @@
     text-align: right;
 }
 
+.hotel-filter__button:disabled {
+    color: #aaaaaa;
+    cursor: not-allowed;
+}
+
 .hotel-filter__menu {
     position: absolute;
     right: 0;
