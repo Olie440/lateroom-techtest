@@ -1,15 +1,15 @@
 import React from "react";
-import Loading from "./loading.component";
+import Error from "../error.component";
 import { shallow } from "enzyme";
 
-describe("<Loading />", () => {
+describe("<Error />", () => {
   it("renders correctly", () => {
-    const component = shallow(<Loading />);
+    const component = shallow(<Error />);
     expect(component).toMatchSnapshot();
   });
 
   it("displays the passed in message", () => {
-    const component = shallow(<Loading message="testestets" />);
+    const component = shallow(<Error message="testestets" />);
     expect(component).toMatchSnapshot();
   });
 });

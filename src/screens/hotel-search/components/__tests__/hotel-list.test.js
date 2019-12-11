@@ -1,6 +1,6 @@
 import React from "react";
-import { HotelList, mapStateToProps } from "./hotel-list.component";
-import mockHotels from "../../../../__mocks__/mock-hotels";
+import { HotelList, mapStateToProps } from "../hotel-list.component";
+import mockHotels from "../../../../../__mocks__/mock-hotels";
 import { shallow } from "enzyme";
 
 describe("HotelList", () => {

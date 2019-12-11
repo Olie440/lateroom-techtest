@@ -1,5 +1,9 @@
 import React from "react";
-import { HotelFilter, mapStateToProps, Button } from "./hotel-filter.component";
+import {
+  HotelFilter,
+  mapStateToProps,
+  Button
+} from "../hotel-filter.component";
 import { shallow } from "enzyme";
 
 describe("HotelFilter", () => {
