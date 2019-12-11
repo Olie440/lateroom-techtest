@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import HotelList from "./components/hotel-list/hotel-list.component";
-import HotelFilter from "./components/hotel-filter/hotel-filter.component";
+import HotelList from "./components/hotel-list.component";
+import HotelFilter from "./components/hotel-filter.component";
 
 export default function HotelSearchScreen() {
   return (
