@@ -1,15 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { capitalize } from "lodash";
+
 import Loading from "../../../components/loading.component";
 import Error from "../../../components/error.component";
 import loadHotels from "../../../redux/hotels/actions";
-import { intersection, capitalize } from "lodash";
+import {
+  filteredHotels,
+  hotelsAreLoading,
+  hotelsHaveError,
+  hotelsHaveLoaded
+} from "../../../redux/hotels/selectors";
 
-// Ideally we would have an id for each hotel we could use as the key
-export function HotelRow({ name, starRating, facilities }, index) {
+export function HotelRow({ name, starRating, facilities, id }) {
   return (
-    <HotelRowContainer key={index}>
+    <HotelRowContainer key={id}>
       <HotelName>{capitalize(name)}</HotelName>
       <HotelInfo>
         <strong>Rating: </strong>
@@ -23,8 +29,13 @@ export function HotelRow({ name, starRating, facilities }, index) {
   );
 }
 
-export function HotelList({ hotels, loadHotels, appliedFilters }) {
-  if (hotels.state === "Loading") {
+export function HotelList({ loadHotels, hotels, loading, error, loaded }) {
+  if (!loading && !error && !loaded) {
+    loadHotels();
+    return null;
+  }
+
+  if (loading) {
     return (
       <Container>
         <Loading message="Loading Hotel Data." />
@@ -32,7 +43,7 @@ export function HotelList({ hotels, loadHotels, appliedFilters }) {
     );
   }
 
-  if (hotels.state === "Error") {
+  if (error) {
     return (
       <Container>
         <Error message="Error loading Hotel Data, please refresh to try again." />
@@ -40,28 +51,15 @@ export function HotelList({ hotels, loadHotels, appliedFilters }) {
     );
   }
 
-  if (hotels.state === "None") {
-    loadHotels();
-    return null;
-  }
-
-  if (appliedFilters.length === 0) {
-    return <Container>{hotels.data.map(HotelRow)}</Container>;
-  }
-
-  return (
-    <Container>
-      {hotels.data
-        .filter(x => intersection(x.facilities, appliedFilters).length)
-        .map(HotelRow)}
-    </Container>
-  );
+  return <Container>{hotels.map(HotelRow)}</Container>;
 }
 
-export function mapStateToProps(state) {
+function mapStateToProps(state) {
   return {
-    hotels: state.hotels,
-    appliedFilters: state.filters.appliedFilters
+    hotels: filteredHotels(state),
+    loading: hotelsAreLoading(state),
+    error: hotelsHaveError(state),
+    loaded: hotelsHaveLoaded(state)
   };
 }
 

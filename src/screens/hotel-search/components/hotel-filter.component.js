@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toggleFilter } from "../../../redux/filters/actions";
+import { availableFilters } from "../../../redux/filters/selectors";
 
 export class HotelFilter extends Component {
   state = {
@@ -57,9 +58,9 @@ export class HotelFilter extends Component {
   };
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(store) {
   return {
-    ...state.filters
+    availableFilters: availableFilters(store)
   };
 }
 

@@ -1,24 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HotelList renders nothing and calls the loadHotels action when state = "None" 1`] = `""`;
-
-exports[`HotelList renders the error component when state = "Error" 1`] = `
-<styled.div>
-  <Error
-    message="Error loading Hotel Data, please refresh to try again."
-  />
-</styled.div>
-`;
-
-exports[`HotelList renders the loading component when state = "Loading" 1`] = `
-<styled.div>
-  <Loading
-    message="Loading Hotel Data."
-  />
-</styled.div>
-`;
-
-exports[`HotelList when state = "Success" renders all hotels when appliedFilters is empty 1`] = `
+exports[`HotelList renders hotels correctly 1`] = `
 <styled.div>
   <styled.div
     key="0"
@@ -82,47 +64,18 @@ exports[`HotelList when state = "Success" renders all hotels when appliedFilters
 </styled.div>
 `;
 
-exports[`HotelList when state = "Success" renders filtered hotels when appliedFilters is not empty 1`] = `
+exports[`HotelList renders the error component when error = true 1`] = `
 <styled.div>
-  <styled.div
-    key="0"
-  >
-    <styled.p>
-      Hotelone
-    </styled.p>
-    <styled.p>
-      <strong>
-        Rating: 
-      </strong>
-      5
-      /5
-    </styled.p>
-    <styled.p>
-      <strong>
-        Facilities: 
-      </strong>
-      Car park, Pool
-    </styled.p>
-  </styled.div>
-  <styled.div
-    key="1"
-  >
-    <styled.p>
-      Hoteltwo
-    </styled.p>
-    <styled.p>
-      <strong>
-        Rating: 
-      </strong>
-      3
-      /5
-    </styled.p>
-    <styled.p>
-      <strong>
-        Facilities: 
-      </strong>
-      Car park, Gym
-    </styled.p>
-  </styled.div>
+  <Error
+    message="Error loading Hotel Data, please refresh to try again."
+  />
+</styled.div>
+`;
+
+exports[`HotelList renders the loading component when loading = true 1`] = `
+<styled.div>
+  <Loading
+    message="Loading Hotel Data."
+  />
 </styled.div>
 `;

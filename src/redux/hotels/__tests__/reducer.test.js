@@ -5,6 +5,8 @@ import {
 } from "../../consts";
 import reducer from "../reducer";
 
+jest.mock("uuid/v4", () => () => "MOCK_UUID");
+
 describe("Hotels Reducer", () => {
   it("returns the current state for un reconised actions", () => {
     const result = reducer({ data: "bar" });
@@ -19,17 +21,51 @@ describe("Hotels Reducer", () => {
     });
   });
 
-  it(`sets data to payload and state to 'Success' for a ${DATA_RECEIVED} action`, () => {
-    const action = {
-      type: DATA_RECEIVED,
-      payload: "payload"
-    };
+  describe(`${DATA_RECEIVED} action`, () => {
+    it("sets state to 'Success'", () => {
+      const action = {
+        type: DATA_RECEIVED,
+        payload: [{ foo: "bar" }, { bar: "foo" }]
+      };
 
-    const result = reducer({ data: "bar" }, action);
+      const result = reducer({ data: "bar" }, action);
 
-    expect(result).toEqual({
-      state: "Success",
-      data: "payload"
+      expect(result.state).toEqual("Success");
+    });
+
+    it("Handles normal payloads", () => {
+      const action = {
+        type: DATA_RECEIVED,
+        payload: [{ foo: "bar" }, { bar: "foo" }]
+      };
+
+      const result = reducer({ data: "bar" }, action);
+
+      expect(result.data).toEqual([
+        { id: "MOCK_UUID", foo: "bar" },
+        { id: "MOCK_UUID", bar: "foo" }
+      ]);
+    });
+
+    it("Handles malformed payloads", () => {
+      const consoleErrorSpy = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => null);
+
+      const action = {
+        type: DATA_RECEIVED,
+        payload: { foo: "bar" }
+      };
+
+      const result = reducer({ data: "bar" }, action);
+
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      expect(result).toEqual({
+        state: "Error",
+        data: null
+      });
+
+      console.error.mockRestore();
     });
   });
 
