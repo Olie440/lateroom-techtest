@@ -1,18 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div
-  className="hotel-search-screen"
->
-  <div
-    className="hotel-search-screen__container"
-  >
-    <div
-      className="hotel-search-screen__header"
-    >
+<styled.div>
+  <styled.div>
+    <styled.div>
       <Connect(HotelFilter) />
-    </div>
+    </styled.div>
     <Connect(HotelList) />
-  </div>
-</div>
+  </styled.div>
+</styled.div>
 `;

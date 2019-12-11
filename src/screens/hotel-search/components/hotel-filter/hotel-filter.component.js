@@ -1,72 +1,100 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { toggleFilter } from '../../../../redux/actions/filter-hotels';
-
-import './hotel-filter.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { toggleFilter } from "../../../../redux/actions/filter-hotels";
 
 export class HotelFilter extends Component {
-    state = {
-        open: false
-    }
+  state = {
+    open: false
+  };
 
-    render() {
-        const buttonDisabled = this.props.availableFilters.length === 0;
+  render() {
+    const buttonDisabled = this.props.availableFilters.length === 0;
 
-        return (
-            <div className="hotel-filter">
-                <button className="hotel-filter__button" onClick={this.toggleOpen} disabled={buttonDisabled}>
-                    <FontAwesomeIcon icon={faFilter} />
-                </button>
-                { this.state.open && this.renderMenu() }
-            </div>
-        )
-    }
+    return (
+      <Wrapper>
+        <Button onClick={this.toggleOpen} disabled={buttonDisabled}>
+          <FontAwesomeIcon icon={faFilter} />
+        </Button>
+        {this.state.open && this.renderMenu()}
+      </Wrapper>
+    );
+  }
 
-    renderMenu() {
-        return (
-            <div className="hotel-filter__menu">
-                { this.props.availableFilters.map(this.renderMenuItem) }
-            </div>
-        )
-    }
+  renderMenu() {
+    const { availableFilters } = this.props;
 
-    renderMenuItem = (item) => {
-        const checked = this.props.appliedFilters.includes(item);
+    return (
+      <Menu>
+        {availableFilters.map(item => (
+          <MenuItem key={item}>
+            <input
+              type="checkbox"
+              checked={this.isItemChecked(item)}
+              value={item}
+              onChange={this.toggleFilter}
+            />
+            {item}
+          </MenuItem>
+        ))}
+      </Menu>
+    );
+  }
 
-        return (
-            <div className="hotel-filter__menu-item" key={item}>
-                <input
-                    type="checkbox"
-                    checked={checked}
-                    value={item}
-                    onChange={this.toggleFilter} />
-                { item }
-            </div>
-        )
-    }
+  isItemChecked = item => this.props.appliedFilters.includes(item);
 
-    toggleOpen = () => {
-        this.setState((state) => ({
-            open: !state.open
-        }));
-    }
+  toggleOpen = () => {
+    this.setState(state => ({
+      open: !state.open
+    }));
+  };
 
-    toggleFilter = (event) => {
-        const { value, checked } = event.target;
-        this.props.toggleFilter(value, checked);
-    }
+  toggleFilter = event => {
+    const { value, checked } = event.target;
+    this.props.toggleFilter(value, checked);
+  };
 }
 
 export function mapStateToProps(state) {
-    return {
-        ...state.filters
-    }
+  return {
+    ...state.filters
+  };
 }
 
 const actions = {
-    toggleFilter
+  toggleFilter
 };
 
 export default connect(mapStateToProps, actions)(HotelFilter);
+
+export const Wrapper = styled.div`
+  position: relative;
+  text-align: right;
+`;
+
+export const Button = styled.button`
+  &:disabled {
+    color: #aaaaaa;
+    cursor: not-allowed;
+  }
+`;
+
+export const Menu = styled.div`
+  position: absolute;
+  right: 0;
+  text-align: left;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+`;
+
+export const MenuItem = styled.div`
+  height: 1.5rem;
+
+  input {
+    vertical-align: sub;
+    margin-right: 0.25em;
+  }
+`;

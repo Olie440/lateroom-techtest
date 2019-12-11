@@ -3,124 +3,126 @@
 exports[`HotelList renders nothing and calls the loadHotels action when state = "None" 1`] = `""`;
 
 exports[`HotelList renders the error component when state = "Error" 1`] = `
-<div
-  className="hotel-list"
->
+<styled.div>
   <Error
     message="Error loading Hotel Data, please refresh to try again."
   />
-</div>
+</styled.div>
 `;
 
 exports[`HotelList renders the loading component when state = "Loading" 1`] = `
-<div
-  className="hotel-list"
->
+<styled.div>
   <Loading
     message="Loading Hotel Data."
   />
-</div>
+</styled.div>
 `;
 
 exports[`HotelList when state = "Success" renders all hotels when appliedFilters is empty 1`] = `
-<div
-  className="hotel-list"
->
-  <div
-    className="hotel-list__row"
+<styled.div>
+  <styled.div
     key="0"
   >
-    <p
-      className="hotel-list__title"
-    >
-      hotelone
-    </p>
-    <p>
-      Rating: 
+    <styled.p>
+      Hotelone
+    </styled.p>
+    <styled.p>
+      <strong>
+        Rating: 
+      </strong>
       5
-    </p>
-    <p>
-      Facilities: 
-      car park, pool
-    </p>
-  </div>
-  <div
-    className="hotel-list__row"
+      /5
+    </styled.p>
+    <styled.p>
+      <strong>
+        Facilities: 
+      </strong>
+      Car park, Pool
+    </styled.p>
+  </styled.div>
+  <styled.div
     key="1"
   >
-    <p
-      className="hotel-list__title"
-    >
-      hoteltwo
-    </p>
-    <p>
-      Rating: 
+    <styled.p>
+      Hoteltwo
+    </styled.p>
+    <styled.p>
+      <strong>
+        Rating: 
+      </strong>
       3
-    </p>
-    <p>
-      Facilities: 
-      car park, gym
-    </p>
-  </div>
-  <div
-    className="hotel-list__row"
+      /5
+    </styled.p>
+    <styled.p>
+      <strong>
+        Facilities: 
+      </strong>
+      Car park, Gym
+    </styled.p>
+  </styled.div>
+  <styled.div
     key="2"
   >
-    <p
-      className="hotel-list__title"
-    >
-      hotelthree
-    </p>
-    <p>
-      Rating: 
+    <styled.p>
+      Hotelthree
+    </styled.p>
+    <styled.p>
+      <strong>
+        Rating: 
+      </strong>
       3
-    </p>
-    <p>
-      Facilities: 
-    </p>
-  </div>
-</div>
+      /5
+    </styled.p>
+    <styled.p>
+      <strong>
+        Facilities: 
+      </strong>
+    </styled.p>
+  </styled.div>
+</styled.div>
 `;
 
 exports[`HotelList when state = "Success" renders filtered hotels when appliedFilters is not empty 1`] = `
-<div
-  className="hotel-list"
->
-  <div
-    className="hotel-list__row"
+<styled.div>
+  <styled.div
     key="0"
   >
-    <p
-      className="hotel-list__title"
-    >
-      hotelone
-    </p>
-    <p>
-      Rating: 
+    <styled.p>
+      Hotelone
+    </styled.p>
+    <styled.p>
+      <strong>
+        Rating: 
+      </strong>
       5
-    </p>
-    <p>
-      Facilities: 
-      car park, pool
-    </p>
-  </div>
-  <div
-    className="hotel-list__row"
+      /5
+    </styled.p>
+    <styled.p>
+      <strong>
+        Facilities: 
+      </strong>
+      Car park, Pool
+    </styled.p>
+  </styled.div>
+  <styled.div
     key="1"
   >
-    <p
-      className="hotel-list__title"
-    >
-      hoteltwo
-    </p>
-    <p>
-      Rating: 
+    <styled.p>
+      Hoteltwo
+    </styled.p>
+    <styled.p>
+      <strong>
+        Rating: 
+      </strong>
       3
-    </p>
-    <p>
-      Facilities: 
-      car park, gym
-    </p>
-  </div>
-</div>
+      /5
+    </styled.p>
+    <styled.p>
+      <strong>
+        Facilities: 
+      </strong>
+      Car park, Gym
+    </styled.p>
+  </styled.div>
+</styled.div>
 `;

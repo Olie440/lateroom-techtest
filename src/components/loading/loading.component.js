@@ -1,16 +1,24 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import './loading.css';
-
-export default function Loading({ message = '' }) {
-    return (
-        <div className="loading">
-            <p className="loading__icon">
-                <FontAwesomeIcon icon={faSpinner} size="2x" spin />
-            </p>
-            <p className="loading__body">{message}</p>
-        </div>
-    )
+export default function Loading({ message = "" }) {
+  return (
+    <LoadingContainer>
+      <LoadingIcon>
+        <FontAwesomeIcon icon={faSpinner} size="2x" spin />
+      </LoadingIcon>
+      <p>{message}</p>
+    </LoadingContainer>
+  );
 }
+
+export const LoadingContainer = styled.div`
+  text-align: center;
+  padding: 1rem;
+`;
+
+export const LoadingIcon = styled.p`
+  margin-bottom: 0.5rem;
+`;

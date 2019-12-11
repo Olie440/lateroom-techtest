@@ -1,11 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HotelFilter disables the button when availableFilters.length = 0 1`] = `
-<div
-  className="hotel-filter"
->
-  <button
-    className="hotel-filter__button"
+<styled.div>
+  <styled.button
     disabled={true}
     onClick={[Function]}
   >
@@ -39,16 +36,13 @@ exports[`HotelFilter disables the button when availableFilters.length = 0 1`] = 
       title=""
       transform={null}
     />
-  </button>
-</div>
+  </styled.button>
+</styled.div>
 `;
 
 exports[`HotelFilter when state.open = false only renders the filter button 1`] = `
-<div
-  className="hotel-filter"
->
-  <button
-    className="hotel-filter__button"
+<styled.div>
+  <styled.button
     disabled={false}
     onClick={[Function]}
   >
@@ -82,16 +76,13 @@ exports[`HotelFilter when state.open = false only renders the filter button 1`] 
       title=""
       transform={null}
     />
-  </button>
-</div>
+  </styled.button>
+</styled.div>
 `;
 
 exports[`HotelFilter when state.open = true only renders the filter button 1`] = `
-<div
-  className="hotel-filter"
->
-  <button
-    className="hotel-filter__button"
+<styled.div>
+  <styled.button
     disabled={false}
     onClick={[Function]}
   >
@@ -125,12 +116,9 @@ exports[`HotelFilter when state.open = true only renders the filter button 1`] =
       title=""
       transform={null}
     />
-  </button>
-  <div
-    className="hotel-filter__menu"
-  >
-    <div
-      className="hotel-filter__menu-item"
+  </styled.button>
+  <styled.div>
+    <styled.div
       key="car park"
     >
       <input
@@ -140,9 +128,8 @@ exports[`HotelFilter when state.open = true only renders the filter button 1`] =
         value="car park"
       />
       car park
-    </div>
-    <div
-      className="hotel-filter__menu-item"
+    </styled.div>
+    <styled.div
       key="pool"
     >
       <input
@@ -152,9 +139,8 @@ exports[`HotelFilter when state.open = true only renders the filter button 1`] =
         value="pool"
       />
       pool
-    </div>
-    <div
-      className="hotel-filter__menu-item"
+    </styled.div>
+    <styled.div
       key="gym"
     >
       <input
@@ -164,7 +150,7 @@ exports[`HotelFilter when state.open = true only renders the filter button 1`] =
         value="gym"
       />
       gym
-    </div>
-  </div>
-</div>
+    </styled.div>
+  </styled.div>
+</styled.div>
 `;
