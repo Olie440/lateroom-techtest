@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Loading from "../../../components/loading.component";
 import Error from "../../../components/error.component";
-import loadHotels from "../../../redux/actions/load-hotels";
+import loadHotels from "../../../redux/hotels/actions";
 import { intersection, capitalize } from "lodash";
 
 // Ideally we would have an id for each hotel we could use as the key
