@@ -1,11 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { capitalize } from "lodash";
 
 import Loading from "../../../components/loading.component";
 import Error from "../../../components/error.component";
-import loadHotels from "../../../redux/hotels/actions";
+import { loadHotelsAction } from "../../../redux/hotels/actions";
+import useAction from "../../../redux/use-action";
 import {
   filteredHotels,
   hotelsAreLoading,
@@ -13,23 +14,13 @@ import {
   hotelsHaveLoaded
 } from "../../../redux/hotels/selectors";
 
-export function HotelRow({ name, starRating, facilities, id }) {
-  return (
-    <HotelRowContainer key={id}>
-      <HotelName>{capitalize(name)}</HotelName>
-      <HotelInfo>
-        <strong>Rating: </strong>
-        {starRating}/5
-      </HotelInfo>
-      <HotelInfo>
-        <strong>Facilities: </strong>
-        {facilities.map(x => capitalize(x)).join(", ")}
-      </HotelInfo>
-    </HotelRowContainer>
-  );
-}
+export default function HotelList() {
+  const loadHotels = useAction(loadHotelsAction);
+  const hotels = useSelector(filteredHotels);
+  const loading = useSelector(hotelsAreLoading);
+  const error = useSelector(hotelsHaveError);
+  const loaded = useSelector(hotelsHaveLoaded);
 
-export function HotelList({ loadHotels, hotels, loading, error, loaded }) {
   if (!loading && !error && !loaded) {
     loadHotels();
     return null;
@@ -54,20 +45,21 @@ export function HotelList({ loadHotels, hotels, loading, error, loaded }) {
   return <Container>{hotels.map(HotelRow)}</Container>;
 }
 
-function mapStateToProps(state) {
-  return {
-    hotels: filteredHotels(state),
-    loading: hotelsAreLoading(state),
-    error: hotelsHaveError(state),
-    loaded: hotelsHaveLoaded(state)
-  };
+export function HotelRow({ name, starRating, facilities, id }) {
+  return (
+    <HotelRowContainer key={id}>
+      <HotelName>{capitalize(name)}</HotelName>
+      <HotelInfo>
+        <strong>Rating: </strong>
+        {starRating}/5
+      </HotelInfo>
+      <HotelInfo>
+        <strong>Facilities: </strong>
+        {facilities.map(x => capitalize(x)).join(", ")}
+      </HotelInfo>
+    </HotelRowContainer>
+  );
 }
-
-const actions = {
-  loadHotels
-};
-
-export default connect(mapStateToProps, actions)(HotelList);
 
 export const Container = styled.div`
   background: #ffffff;

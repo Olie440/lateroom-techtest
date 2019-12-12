@@ -1,8 +1,8 @@
-import { filters } from "../selectors";
+import { filtersSelector } from "../selectors";
 
 describe("filters selector", () => {
   it("outputs the correct format and adds the checked property", () => {
-    const result = filters({
+    const result = filtersSelector({
       filters: {
         appliedFilters: ["car park"],
         availableFilters: ["car park", "pool", "gym"]

@@ -1,9 +1,9 @@
 import { ADD_FILTER, REMOVE_FILTER } from "../../consts";
-import { toggleFilter } from "../actions";
+import { toggleFilterAction } from "../actions";
 
 describe("toggleFilter Action", () => {
   it(`it dispatches a ${ADD_FILTER} action when applied = true`, () => {
-    const result = toggleFilter("test", true);
+    const result = toggleFilterAction("test", true);
     expect(result).toEqual({
       type: ADD_FILTER,
       payload: "test"
@@ -11,7 +11,7 @@ describe("toggleFilter Action", () => {
   });
 
   it(`it dispatches a ${REMOVE_FILTER} action when applied = false`, () => {
-    const result = toggleFilter("test", false);
+    const result = toggleFilterAction("test", false);
     expect(result).toEqual({
       type: REMOVE_FILTER,
       payload: "test"

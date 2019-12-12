@@ -1,47 +1,82 @@
 import React from "react";
-import { HotelList } from "../hotel-list.component";
-import mockHotels from "../../../../../__mocks__/mock-hotels";
+import { when } from "jest-when";
 import { shallow } from "enzyme";
 
+import * as useAction from "../../../../redux/use-action";
+import * as ReactRedux from "react-redux";
+
+import HotelList from "../hotel-list.component";
+import mockHotels from "../../../../../__mocks__/mock-hotels";
+import {
+  filteredHotels,
+  hotelsAreLoading,
+  hotelsHaveError,
+  hotelsHaveLoaded
+} from "../../../../redux/hotels/selectors";
+
 describe("HotelList", () => {
-  let component, props;
+  let useSelectorMock, useActionMock, loadHotelsMock;
 
   beforeEach(() => {
-    props = {
-      loadHotels: jest.fn(),
-      loading: false,
-      error: false,
-      loaded: false,
-      hotels: []
-    };
-    component = shallow(<HotelList {...props} />);
+    useSelectorMock = jest.spyOn(ReactRedux, "useSelector");
+    useActionMock = jest.spyOn(useAction, "default");
+    loadHotelsMock = jest.fn();
+
+    useActionMock.mockReturnValue(loadHotelsMock);
+
+    when(useSelectorMock)
+      .calledWith(filteredHotels)
+      .mockReturnValue([])
+      .calledWith(hotelsAreLoading)
+      .mockReturnValue(false)
+      .calledWith(hotelsHaveError)
+      .mockReturnValue(false)
+      .calledWith(hotelsHaveLoaded)
+      .mockReturnValue(false);
+  });
+
+  afterEach(() => {
+    useSelectorMock.mockRestore();
+    useActionMock.mockRestore();
   });
 
   it("calls the loadHotels action when loading = false, error = false and loaded = false", () => {
-    expect(props.loadHotels).toHaveBeenCalled();
+    shallow(<HotelList />);
+    expect(loadHotelsMock).toHaveBeenCalled();
   });
 
   it("renders hotels correctly", () => {
-    component.setProps({
-      loaded: true,
-      hotels: mockHotels().map((hotel, index) => ({ ...hotel, id: index }))
-    });
+    const hotels = mockHotels().map((hotel, index) => ({
+      ...hotel,
+      id: index
+    }));
+
+    when(useSelectorMock)
+      .calledWith(filteredHotels)
+      .mockReturnValue(hotels)
+      .calledWith(hotelsHaveLoaded)
+      .mockReturnValue(true);
+
+    const component = shallow(<HotelList />);
+
     expect(component).toMatchSnapshot();
   });
 
   it("renders the loading component when loading = true", () => {
-    component.setProps({
-      loading: true
-    });
+    when(useSelectorMock)
+      .calledWith(hotelsAreLoading)
+      .mockReturnValue(true);
 
+    const component = shallow(<HotelList />);
     expect(component).toMatchSnapshot();
   });
 
   it("renders the error component when error = true", () => {
-    component.setProps({
-      error: true
-    });
+    when(useSelectorMock)
+      .calledWith(hotelsHaveError)
+      .mockReturnValue(true);
 
+    const component = shallow(<HotelList />);
     expect(component).toMatchSnapshot();
   });
 });

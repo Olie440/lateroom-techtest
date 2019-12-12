@@ -6,7 +6,7 @@ import {
   DATA_RECEIVED,
   DATA_REQUEST_FAILED
 } from "../../consts";
-import loadHotels from "../actions";
+import { loadHotelsAction } from "../actions";
 
 describe("loadHotels Action", () => {
   let mockFetch, mockDispatch;
@@ -21,19 +21,19 @@ describe("loadHotels Action", () => {
   });
 
   it(`dispatches a ${DATA_REQUESTED} action`, async () => {
-    await loadHotels()(mockDispatch);
+    await loadHotelsAction()(mockDispatch);
     expect(mockDispatch).toHaveBeenCalledWith({
       type: DATA_REQUESTED
     });
   });
 
   it("it requests the data from correct url", async () => {
-    await loadHotels()(mockDispatch);
+    await loadHotelsAction()(mockDispatch);
     expect(fetch).toHaveBeenCalledWith("http://localhost:4000/hotels");
   });
 
   it(`dispatches a ${DATA_REQUEST_FAILED} when fetch returns an error`, async () => {
-    await loadHotels()(mockDispatch);
+    await loadHotelsAction()(mockDispatch);
 
     expect(mockDispatch).toHaveBeenCalledWith({
       type: DATA_REQUEST_FAILED
@@ -44,7 +44,7 @@ describe("loadHotels Action", () => {
     const expectedData = mockHotels();
     mockFetch.mockRequest("http://localhost:4000/hotels", expectedData);
 
-    await loadHotels()(mockDispatch);
+    await loadHotelsAction()(mockDispatch);
     expect(mockDispatch).toHaveBeenCalledWith({
       type: DATA_RECEIVED,
       payload: expectedData

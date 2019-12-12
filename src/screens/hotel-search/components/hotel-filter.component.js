@@ -1,51 +1,46 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { toggleFilter } from "../../../redux/filters/actions";
-import { filters } from "../../../redux/filters/selectors";
+import { toggleFilterAction } from "../../../redux/filters/actions";
+import { filtersSelector } from "../../../redux/filters/selectors";
+import useAction from "../../../redux/use-action";
 
-export function HotelFilter({ filters, toggleFilter }) {
+export default function FilterMenu() {
   const [open, setOpen] = useState(false);
-
-  const onMenuItemChange = event => {
-    const { value, checked } = event.target;
-    toggleFilter(value, checked);
-  };
-
-  const renderMenuItem = filter => (
-    <MenuItem {...filter} key={filter.name} onChange={onMenuItemChange} />
-  );
+  const filters = useSelector(filtersSelector);
 
   return (
     <Wrapper>
       <Button onClick={() => setOpen(!open)} disabled={filters.length === 0}>
         <FontAwesomeIcon icon={faFilter} />
       </Button>
-      {open && <Menu>{filters.map(renderMenuItem)}</Menu>}
+      {open && <Menu>{filters.map(FilterItem)}</Menu>}
     </Wrapper>
   );
 }
 
-export const MenuItem = ({ name, checked, onChange }) => (
-  <MenuItemWrapper>
-    <input type="checkbox" checked={checked} value={name} onChange={onChange} />
-    {name}
-  </MenuItemWrapper>
-);
+export const FilterItem = ({ name, checked }) => {
+  const toggleFilter = useAction(toggleFilterAction);
 
-export function mapStateToProps(store) {
-  return {
-    filters: filters(store)
+  const onChange = event => {
+    const { value, checked } = event.target;
+    toggleFilter(value, checked);
   };
-}
 
-const actions = {
-  toggleFilter
+  return (
+    <MenuItemWrapper key={name}>
+      <input
+        type="checkbox"
+        checked={checked}
+        value={name}
+        onChange={onChange}
+      />
+      {name}
+    </MenuItemWrapper>
+  );
 };
-
-export default connect(mapStateToProps, actions)(HotelFilter);
 
 export const Wrapper = styled.div`
   position: relative;

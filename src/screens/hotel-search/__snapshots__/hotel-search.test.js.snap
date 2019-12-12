@@ -4,9 +4,9 @@ exports[`renders correctly 1`] = `
 <styled.div>
   <styled.div>
     <styled.div>
-      <Connect(HotelFilter) />
+      <FilterMenu />
     </styled.div>
-    <Connect(HotelList) />
+    <HotelList />
   </styled.div>
 </styled.div>
 `;

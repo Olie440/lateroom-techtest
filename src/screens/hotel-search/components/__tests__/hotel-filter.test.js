@@ -1,28 +1,45 @@
 import React from "react";
-import { HotelFilter, Button, Menu } from "../hotel-filter.component";
+import FilterMenu, { Button, Menu } from "../hotel-filter.component";
 import { mount } from "enzyme";
+import { when } from "jest-when";
 
-describe("HotelFilter", () => {
-  let component, props;
+import * as ReactRedux from "react-redux";
+
+import { filtersSelector } from "../../../../redux/filters/selectors";
+import * as useAction from "../../../../redux/use-action";
+
+describe("FilterMenu", () => {
+  let useSelectorMock, useActionMock, toggleFilterMock;
 
   beforeEach(() => {
-    props = {
-      toggleFilter: jest.fn(),
-      filters: [
+    useSelectorMock = jest.spyOn(ReactRedux, "useSelector");
+    useActionMock = jest.spyOn(useAction, "default");
+    toggleFilterMock = jest.fn();
+
+    useActionMock.mockReturnValue(toggleFilterMock);
+
+    when(useSelectorMock)
+      .calledWith(filtersSelector)
+      .mockReturnValue([
         { name: "car park", checked: true },
         { name: "pool", checked: false },
         { name: "gym", checked: false }
-      ]
-    };
-    component = mount(<HotelFilter {...props} />);
+      ]);
+  });
+
+  afterEach(() => {
+    useSelectorMock.mockRestore();
+    useActionMock.mockRestore();
   });
 
   describe("Filter Button", () => {
     it("only renders the filter button", () => {
+      const component = mount(<FilterMenu />);
       expect(component.find(Menu).length).toEqual(0);
     });
 
     it("toggles the Menu when clicked", () => {
+      const component = mount(<FilterMenu />);
       component.find(Button).simulate("click");
       expect(component.find(Menu).length).toEqual(1);
 
@@ -32,7 +49,10 @@ describe("HotelFilter", () => {
   });
 
   describe("Filter Menu", () => {
+    let component;
+
     beforeEach(() => {
+      component = mount(<FilterMenu />);
       component.find(Button).simulate("click");
     });
 
@@ -47,7 +67,7 @@ describe("HotelFilter", () => {
         .find("input")
         .at(0)
         .simulate("change", fakeEvent);
-      expect(props.toggleFilter).toHaveBeenCalledWith("car park", false);
+      expect(toggleFilterMock).toHaveBeenCalledWith("car park", false);
     });
 
     it("calls toggleFilter with the name and true when a unchecked filter is clicked", () => {
@@ -61,14 +81,16 @@ describe("HotelFilter", () => {
         .find("input")
         .at(0)
         .simulate("change", fakeEvent);
-      expect(props.toggleFilter).toHaveBeenCalledWith("car park", true);
+      expect(toggleFilterMock).toHaveBeenCalledWith("car park", true);
     });
   });
 
   it("disables the button when filters.length = 0", () => {
-    component.setProps({
-      filters: []
-    });
+    when(useSelectorMock)
+      .calledWith(filtersSelector)
+      .mockReturnValue([]);
+
+    const component = mount(<FilterMenu />);
     expect(component.find(Button).prop("disabled")).toEqual(true);
   });
 });
