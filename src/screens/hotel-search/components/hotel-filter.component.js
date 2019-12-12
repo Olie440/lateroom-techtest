@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { toggleFilterAction } from "../../../redux/filters/actions";
-import { filtersSelector } from "../../../redux/filters/selectors";
-import useAction from "../../../redux/use-action";
+import { toggleFilterAction } from "src/redux/filters/actions";
+import { filtersSelector } from "src/redux/filters/selectors";
+import useAction from "src/redux/use-action";
 
 export default function FilterMenu() {
   const [open, setOpen] = useState(false);

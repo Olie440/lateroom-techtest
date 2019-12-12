@@ -1,4 +1,4 @@
-import mockHotels from "../../../../__mocks__/mock-hotels";
+import mockHotels from "src/__mocks__/mock-hotels";
 import { filteredHotels } from "../selectors";
 
 describe("filteredHotels", () => {

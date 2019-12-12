@@ -2,17 +2,17 @@ import React from "react";
 import { when } from "jest-when";
 import { shallow } from "enzyme";
 
-import * as useAction from "../../../../redux/use-action";
+import * as useAction from "src/redux/use-action";
 import * as ReactRedux from "react-redux";
 
 import HotelList from "../hotel-list.component";
-import mockHotels from "../../../../../__mocks__/mock-hotels";
+import mockHotels from "src/__mocks__/mock-hotels";
 import {
   filteredHotels,
   hotelsAreLoading,
   hotelsHaveError,
   hotelsHaveLoaded
-} from "../../../../redux/hotels/selectors";
+} from "src/redux/hotels/selectors";
 
 describe("HotelList", () => {
   let useSelectorMock, useActionMock, loadHotelsMock;

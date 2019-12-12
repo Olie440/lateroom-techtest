@@ -4,7 +4,7 @@ import {
   DATA_REQUESTED,
   DATA_RECEIVED
 } from "../../consts";
-import mockHotels from "../../../../__mocks__/mock-hotels";
+import mockHotels from "src/__mocks__/mock-hotels";
 import reducer from "../reducer";
 
 describe("Filter Reducer", () => {

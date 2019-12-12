@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { capitalize } from "lodash";
 
-import Loading from "../../../components/loading.component";
-import Error from "../../../components/error.component";
-import { loadHotelsAction } from "../../../redux/hotels/actions";
-import useAction from "../../../redux/use-action";
+import Loading from "src/components/loading.component";
+import Error from "src/components/error.component";
+import { loadHotelsAction } from "src/redux/hotels/actions";
+import useAction from "src/redux/use-action";
 import {
   filteredHotels,
   hotelsAreLoading,
   hotelsHaveError,
   hotelsHaveLoaded
-} from "../../../redux/hotels/selectors";
+} from "src/redux/hotels/selectors";
 
 export default function HotelList() {
   const loadHotels = useAction(loadHotelsAction);

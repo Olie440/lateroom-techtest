@@ -1,11 +1,11 @@
-import MockFetch from "../../../../__mocks__/mock-fetch";
-import mockHotels from "../../../../__mocks__/mock-hotels";
+import MockFetch from "src/__mocks__/mock-fetch";
+import mockHotels from "src/__mocks__/mock-hotels";
 
 import {
   DATA_REQUESTED,
   DATA_RECEIVED,
   DATA_REQUEST_FAILED
-} from "../../consts";
+} from "src/redux/consts";
 import { loadHotelsAction } from "../actions";
 
 describe("loadHotels Action", () => {

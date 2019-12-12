@@ -5,8 +5,8 @@ import { when } from "jest-when";
 
 import * as ReactRedux from "react-redux";
 
-import { filtersSelector } from "../../../../redux/filters/selectors";
-import * as useAction from "../../../../redux/use-action";
+import { filtersSelector } from "src/redux/filters/selectors";
+import * as useAction from "src/redux/use-action";
 
 describe("FilterMenu", () => {
   let useSelectorMock, useActionMock, toggleFilterMock;
