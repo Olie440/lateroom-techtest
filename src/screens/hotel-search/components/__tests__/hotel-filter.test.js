@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  HotelFilter,
-  mapStateToProps,
-  Button
-} from "../hotel-filter.component";
+import { HotelFilter, Button } from "../hotel-filter.component";
 import { shallow } from "enzyme";
 
 describe("HotelFilter", () => {
@@ -11,9 +7,12 @@ describe("HotelFilter", () => {
 
   beforeEach(() => {
     props = {
-      appliedFilters: ["car park"],
-      availableFilters: ["car park", "pool", "gym"],
-      toggleFilter: jest.fn()
+      toggleFilter: jest.fn(),
+      filters: [
+        { name: "car park", checked: true },
+        { name: "pool", checked: false },
+        { name: "gym", checked: false }
+      ]
     };
     component = shallow(<HotelFilter {...props} />);
   });
@@ -74,27 +73,11 @@ describe("HotelFilter", () => {
     });
   });
 
-  it("disables the button when availableFilters.length = 0", () => {
+  it("disables the button when filters.length = 0", () => {
     component.setProps({
-      availableFilters: []
+      filters: []
     });
 
     expect(component).toMatchSnapshot();
-  });
-
-  describe("mapStateToProps", () => {
-    it("destructures the filters key", () => {
-      const result = mapStateToProps({
-        filters: {
-          availableFilters: ["foo"],
-          appliedFilters: []
-        }
-      });
-
-      expect(result).toEqual({
-        availableFilters: ["foo"],
-        appliedFilters: []
-      });
-    });
   });
 });

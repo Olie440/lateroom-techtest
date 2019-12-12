@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HotelFilter disables the button when availableFilters.length = 0 1`] = `
+exports[`HotelFilter disables the button when filters.length = 0 1`] = `
 <styled.div>
   <styled.button
     disabled={true}

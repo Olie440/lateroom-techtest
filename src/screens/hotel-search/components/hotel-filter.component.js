@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toggleFilter } from "../../../redux/filters/actions";
-import { availableFilters } from "../../../redux/filters/selectors";
+import { filters } from "../../../redux/filters/selectors";
 
 export class HotelFilter extends Component {
   state = {
@@ -12,39 +12,31 @@ export class HotelFilter extends Component {
   };
 
   render() {
-    const buttonDisabled = this.props.availableFilters.length === 0;
+    const buttonDisabled = this.props.filters.length === 0;
 
     return (
       <Wrapper>
         <Button onClick={this.toggleOpen} disabled={buttonDisabled}>
           <FontAwesomeIcon icon={faFilter} />
         </Button>
-        {this.state.open && this.renderMenu()}
+        {this.state.open && (
+          <Menu>{this.props.filters.map(this.renderMenuItem)}</Menu>
+        )}
       </Wrapper>
     );
   }
 
-  renderMenu() {
-    const { availableFilters } = this.props;
-
-    return (
-      <Menu>
-        {availableFilters.map(item => (
-          <MenuItem key={item}>
-            <input
-              type="checkbox"
-              checked={this.isItemChecked(item)}
-              value={item}
-              onChange={this.toggleFilter}
-            />
-            {item}
-          </MenuItem>
-        ))}
-      </Menu>
-    );
-  }
-
-  isItemChecked = item => this.props.appliedFilters.includes(item);
+  renderMenuItem = ({ name, checked }) => (
+    <MenuItem key={name}>
+      <input
+        type="checkbox"
+        checked={checked}
+        value={name}
+        onChange={this.toggleFilter}
+      />
+      {name}
+    </MenuItem>
+  );
 
   toggleOpen = () => {
     this.setState(state => ({
@@ -60,7 +52,7 @@ export class HotelFilter extends Component {
 
 export function mapStateToProps(store) {
   return {
-    availableFilters: availableFilters(store)
+    filters: filters(store)
   };
 }
 
