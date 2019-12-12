@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HotelList renders hotels correctly 1`] = `
+<styled.div>
+  <HotelRow
+    facilities={
+      Array [
+        "car park",
+        "pool",
+      ]
+    }
+    id={0}
+    key="0"
+    name="hotelone"
+    starRating={5}
+  />
+  <HotelRow
+    facilities={
+      Array [
+        "car park",
+        "gym",
+      ]
+    }
+    id={1}
+    key="1"
+    name="hoteltwo"
+    starRating={3}
+  />
+  <HotelRow
+    facilities={Array []}
+    id={2}
+    key="2"
+    name="hotelthree"
+    starRating={3}
+  />
+</styled.div>
+`;
+
+exports[`HotelList renders the error component when error = true 1`] = `
+<styled.div>
+  <Error
+    message="Error loading Hotel Data, please refresh to try again."
+  />
+</styled.div>
+`;
+
+exports[`HotelList renders the loading component when loading = true 1`] = `
+<styled.div>
+  <Loading
+    message="Loading Hotel Data."
+  />
+</styled.div>
+`;

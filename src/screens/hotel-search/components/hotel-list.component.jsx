@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { capitalize } from "lodash";
 
-import Loading from "src/components/loading.component";
-import Error from "src/components/error.component";
+import Loading from "../../../components/loading.component";
+import Error from "../../../components/error.component";
 import { loadHotelsAction } from "src/redux/hotels/actions";
 import useAction from "src/redux/use-action";
 import {
@@ -42,12 +42,18 @@ export default function HotelList() {
     );
   }
 
-  return <Container>{hotels.map(HotelRow)}</Container>;
+  return (
+    <Container>
+      {hotels.map(props => (
+        <HotelRow {...props} key={props.id} />
+      ))}
+    </Container>
+  );
 }
 
-export function HotelRow({ name, starRating, facilities, id }) {
+export function HotelRow({ name, starRating, facilities }) {
   return (
-    <HotelRowContainer key={id}>
+    <HotelRowContainer>
       <HotelName>{capitalize(name)}</HotelName>
       <HotelInfo>
         <strong>Rating: </strong>

@@ -16,7 +16,13 @@ export default function FilterMenu() {
       <Button onClick={() => setOpen(!open)} disabled={filters.length === 0}>
         <FontAwesomeIcon icon={faFilter} />
       </Button>
-      {open && <Menu>{filters.map(FilterItem)}</Menu>}
+      {open && (
+        <Menu>
+          {filters.map(props => (
+            <FilterItem {...props} key={props.name} />
+          ))}
+        </Menu>
+      )}
     </Wrapper>
   );
 }
@@ -30,7 +36,7 @@ export const FilterItem = ({ name, checked }) => {
   };
 
   return (
-    <MenuItemWrapper key={name}>
+    <MenuItemWrapper>
       <input
         type="checkbox"
         checked={checked}
