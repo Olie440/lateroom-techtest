@@ -1,6 +1,6 @@
-export const filters = store =>
-  store.availableFilters.map(filter => {
-    const checked = store.appliedFilters.includes(filter);
+export const filters = ({ filters }) =>
+  filters.availableFilters.map(filter => {
+    const checked = filters.appliedFilters.includes(filter);
     return {
       name: filter,
       checked

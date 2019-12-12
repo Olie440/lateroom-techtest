@@ -3,8 +3,10 @@ import { filters } from "../selectors";
 describe("filters selector", () => {
   it("outputs the correct format and adds the checked property", () => {
     const result = filters({
-      appliedFilters: ["car park"],
-      availableFilters: ["car park", "pool", "gym"]
+      filters: {
+        appliedFilters: ["car park"],
+        availableFilters: ["car park", "pool", "gym"]
+      }
     });
 
     expect(result).toEqual([
