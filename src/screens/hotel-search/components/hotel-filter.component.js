@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,49 +6,34 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { toggleFilter } from "../../../redux/filters/actions";
 import { filters } from "../../../redux/filters/selectors";
 
-export class HotelFilter extends Component {
-  state = {
-    open: false
+export function HotelFilter({ filters, toggleFilter }) {
+  const [open, setOpen] = useState(false);
+
+  const onMenuItemChange = event => {
+    const { value, checked } = event.target;
+    toggleFilter(value, checked);
   };
 
-  render() {
-    const buttonDisabled = this.props.filters.length === 0;
-
-    return (
-      <Wrapper>
-        <Button onClick={this.toggleOpen} disabled={buttonDisabled}>
-          <FontAwesomeIcon icon={faFilter} />
-        </Button>
-        {this.state.open && (
-          <Menu>{this.props.filters.map(this.renderMenuItem)}</Menu>
-        )}
-      </Wrapper>
-    );
-  }
-
-  renderMenuItem = ({ name, checked }) => (
-    <MenuItem key={name}>
-      <input
-        type="checkbox"
-        checked={checked}
-        value={name}
-        onChange={this.toggleFilter}
-      />
-      {name}
-    </MenuItem>
+  const renderMenuItem = filter => (
+    <MenuItem {...filter} key={filter.name} onChange={onMenuItemChange} />
   );
 
-  toggleOpen = () => {
-    this.setState(state => ({
-      open: !state.open
-    }));
-  };
-
-  toggleFilter = event => {
-    const { value, checked } = event.target;
-    this.props.toggleFilter(value, checked);
-  };
+  return (
+    <Wrapper>
+      <Button onClick={() => setOpen(!open)} disabled={filters.length === 0}>
+        <FontAwesomeIcon icon={faFilter} />
+      </Button>
+      {open && <Menu>{filters.map(renderMenuItem)}</Menu>}
+    </Wrapper>
+  );
 }
+
+export const MenuItem = ({ name, checked, onChange }) => (
+  <MenuItemWrapper>
+    <input type="checkbox" checked={checked} value={name} onChange={onChange} />
+    {name}
+  </MenuItemWrapper>
+);
 
 export function mapStateToProps(store) {
   return {
@@ -83,7 +68,7 @@ export const Menu = styled.div`
   border: 1px solid #cccccc;
 `;
 
-export const MenuItem = styled.div`
+export const MenuItemWrapper = styled.div`
   height: 1.5rem;
 
   input {

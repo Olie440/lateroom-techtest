@@ -1,6 +1,6 @@
 import React from "react";
-import { HotelFilter, Button } from "../hotel-filter.component";
-import { shallow } from "enzyme";
+import { HotelFilter, Button, Menu } from "../hotel-filter.component";
+import { mount } from "enzyme";
 
 describe("HotelFilter", () => {
   let component, props;
@@ -14,34 +14,26 @@ describe("HotelFilter", () => {
         { name: "gym", checked: false }
       ]
     };
-    component = shallow(<HotelFilter {...props} />);
+    component = mount(<HotelFilter {...props} />);
   });
 
-  describe("when state.open = false", () => {
+  describe("Filter Button", () => {
     it("only renders the filter button", () => {
-      expect(component).toMatchSnapshot();
+      expect(component.find(Menu).length).toEqual(0);
     });
 
-    it("toggles state.open = true when clicked", () => {
-      expect(component.state("open")).toEqual(false);
+    it("toggles the Menu when clicked", () => {
       component.find(Button).simulate("click");
-      expect(component.state("open")).toEqual(true);
+      expect(component.find(Menu).length).toEqual(1);
+
+      component.find(Button).simulate("click");
+      expect(component.find(Menu).length).toEqual(0);
     });
   });
 
-  describe("when state.open = true", () => {
+  describe("Filter Menu", () => {
     beforeEach(() => {
-      component.setState({ open: true });
-    });
-
-    it("only renders the filter button", () => {
-      expect(component).toMatchSnapshot();
-    });
-
-    it("toggles state.open = false when clicked", () => {
-      expect(component.state("open")).toEqual(true);
       component.find(Button).simulate("click");
-      expect(component.state("open")).toEqual(false);
     });
 
     it("calls toggleFilter with the name and false when a checked filter is clicked", () => {
@@ -77,7 +69,6 @@ describe("HotelFilter", () => {
     component.setProps({
       filters: []
     });
-
-    expect(component).toMatchSnapshot();
+    expect(component.find(Button).prop("disabled")).toEqual(true);
   });
 });
