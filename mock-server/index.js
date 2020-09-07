@@ -16,7 +16,7 @@ app.get("/hotels", (req, res) => {
     res.type("application/json");
     res.send(JSON.stringify(mockHotels));
     res.end();
-  }, 1000);
+  }, 1000); 
 });
 
 app.listen("4000");

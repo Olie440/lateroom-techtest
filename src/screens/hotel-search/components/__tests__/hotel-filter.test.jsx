@@ -1,5 +1,5 @@
 import React from "react";
-import FilterMenu, { Button, Menu } from "../hotel-filter.component";
+import FilterMenu, { Button, Menu } from "../hotel-filter-menu";
 import { mount } from "enzyme";
 import { when } from "jest-when";
 

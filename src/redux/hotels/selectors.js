@@ -1,20 +1,20 @@
-import { intersection, size } from "lodash";
+import size from 'lodash/size';
 
-export const hotelsAreLoading = ({ hotels }) => hotels.state === "Loading";
-export const hotelsHaveError = ({ hotels }) => hotels.state === "Error";
-export const hotelsHaveLoaded = ({ hotels }) => hotels.state === "Success";
+export const getLoadingState = ({ hotels }) => hotels.loadingState;
 
-export const filteredHotels = store => {
-  const hotels = store.hotels.data;
-  const filters = store.filters.appliedFilters;
+const includesAll = (target, values) => values.every(x => target.includes(x));
 
-  if (!hotelsHaveLoaded(store) || !size(hotels)) {
+export const getFilteredHotels = store => {
+  const { loadingState, data } = store.hotels;
+  const { appliedFilters } = store.filters;
+
+  if (loadingState !== 'Success' || !size(data)) {
     return [];
   }
 
-  if (!size(filters)) {
-    return hotels;
+  if (!size(appliedFilters)) {
+    return data;
   }
 
-  return hotels.filter(x => intersection(x.facilities, filters).length);
+  return data.filter(hotel => includesAll(hotel.facilities, appliedFilters));
 };

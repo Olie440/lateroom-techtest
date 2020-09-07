@@ -1,94 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { capitalize } from "lodash";
+import React from 'react';
 
-import Loading from "../../../components/loading.component";
-import Error from "../../../components/error.component";
-import { loadHotelsAction } from "src/redux/hotels/actions";
-import useAction from "src/redux/use-action";
-import {
-  filteredHotels,
-  hotelsAreLoading,
-  hotelsHaveError,
-  hotelsHaveLoaded
-} from "src/redux/hotels/selectors";
+import useHotels from '../hooks/use-hotels';
+import Loading from '../../../components/loading.component';
+import Error from '../../../components/error.component';
+import HotelListItem from './hotel-list-item';
 
 export default function HotelList() {
-  const loadHotels = useAction(loadHotelsAction);
-  const hotels = useSelector(filteredHotels);
-  const loading = useSelector(hotelsAreLoading);
-  const error = useSelector(hotelsHaveError);
-  const loaded = useSelector(hotelsHaveLoaded);
+  const { loadingState, hotels } = useHotels();
 
-  if (!loading && !error && !loaded) {
-    loadHotels();
-    return null;
+  if (loadingState === 'Loading') {
+    return <Loading message='Loading Hotel Data.' />;
   }
 
-  if (loading) {
-    return (
-      <Container>
-        <Loading message="Loading Hotel Data." />
-      </Container>
-    );
+  if (loadingState === 'Error') {
+    return <Error message='Error loading Hotel Data, please refresh to try again.' />;
   }
 
-  if (error) {
-    return (
-      <Container>
-        <Error message="Error loading Hotel Data, please refresh to try again." />
-      </Container>
-    );
+  if (hotels.length === 0) {
+    return <div>No Hotels</div>;
   }
 
-  return (
-    <Container>
-      {hotels.map(props => (
-        <HotelRow {...props} key={props.id} />
-      ))}
-    </Container>
-  );
+  return hotels.map((hotel) => (
+    <HotelListItem {...hotel} key={hotel.id} />
+  ));
 }
-
-export function HotelRow({ name, starRating, facilities }) {
-  return (
-    <HotelRowContainer>
-      <HotelName>{capitalize(name)}</HotelName>
-      <HotelInfo>
-        <strong>Rating: </strong>
-        {starRating}/5
-      </HotelInfo>
-      <HotelInfo>
-        <strong>Facilities: </strong>
-        {facilities.map(x => capitalize(x)).join(", ")}
-      </HotelInfo>
-    </HotelRowContainer>
-  );
-}
-
-export const Container = styled.div`
-  background: #ffffff;
-  border: 1px solid #cccccc;
-  border-top: none;
-`;
-
-export const HotelRowContainer = styled.div`
-  padding: 1em;
-
-  &:nth-child(even) {
-    background: #f0f0f0;
-  }
-`;
-
-export const HotelName = styled.p`
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-export const HotelInfo = styled.p`
-  font-size: 0.75rem;
-  color: #777777;
-  margin-bottom: 0.25rem;
-`;

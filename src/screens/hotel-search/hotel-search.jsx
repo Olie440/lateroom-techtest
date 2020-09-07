@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import HotelList from "./components/hotel-list.component";
-import HotelFilter from "./components/hotel-filter.component";
+import React from 'react';
+import styled from 'styled-components';
+import HotelList from './components/hotel-list.component';
+import HotelFilter from './components/hotel-filter-menu';
 
 export default function HotelSearchScreen() {
   return (
@@ -10,7 +10,9 @@ export default function HotelSearchScreen() {
         <Header>
           <HotelFilter />
         </Header>
-        <HotelList />
+        <HotelListWrapper>
+          <HotelList />
+        </HotelListWrapper>
       </Container>
     </Background>
   );
@@ -37,4 +39,10 @@ export const Header = styled.div`
   background: #fbe17e;
   border: 1px solid #e1ca71;
   padding: 0.5rem;
+`;
+
+const HotelListWrapper = styled.div`
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-top: none;
 `;
